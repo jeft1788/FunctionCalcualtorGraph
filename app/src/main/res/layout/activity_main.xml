@@ -11,21 +11,43 @@
         android:layout_height="wrap_content"
         android:hint="Enter expression"
         android:inputType="text" />
+    <EditText
+        android:id="@+id/inputEditTextA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/inputEditText"
+        android:hint="Enter a"
+        android:inputType="text" />
+    <EditText
+        android:id="@+id/inputEditTextB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/inputEditTextA"
+        android:hint="Enter b"
+        android:inputType="text" />
 
     <Button
         android:id="@+id/evaluateButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/inputEditText"
+        android:layout_below="@id/inputEditTextB"
         android:layout_marginTop="16dp"
         android:text="Evaluate" />
 
     <TextView
-        android:id="@+id/resultTextView"
+        android:id="@+id/resultTextViewa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/evaluateButton"
         android:layout_marginTop="16dp"
-        android:text="Result: "
+        android:text="Resultado a: "
+        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/resultTextViewb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/resultTextViewa"
+        android:layout_marginTop="16dp"
+        android:text="Resultado b: "
         android:textSize="18sp" />
 </RelativeLayout>

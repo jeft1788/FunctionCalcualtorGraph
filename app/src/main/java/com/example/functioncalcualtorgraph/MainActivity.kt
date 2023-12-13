@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import org.mariuszgromada.math.mxparser.Expression
+import org.mariuszgromada.math.mxparser.Function
 
 
 
@@ -14,32 +15,50 @@ import org.mariuszgromada.math.mxparser.Expression
 
 class MainActivity : AppCompatActivity() {
     private lateinit var inputEditText: EditText
+    private lateinit var inputEditTextA: EditText
+    private lateinit var inputEditTextB: EditText
     private lateinit var evaluateButton: Button
-    private lateinit var resultTextView: TextView
+    private lateinit var resultTextView1: TextView
+    private lateinit var resultTextView2: TextView
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         inputEditText = findViewById<EditText>(R.id.inputEditText)
+        inputEditTextA = findViewById<EditText>(R.id.inputEditTextA)
+        inputEditTextB = findViewById<EditText>(R.id.inputEditTextB)
         evaluateButton = findViewById<Button>(R.id.evaluateButton)
-        resultTextView = findViewById<TextView>(R.id.resultTextView)
+        resultTextView1 = findViewById<TextView>(R.id.resultTextViewa)
+        resultTextView2 = findViewById<TextView>(R.id.resultTextViewb)
+
+
+
         evaluateButton.setOnClickListener {
-            evaluateExpression();
+            var a:Double = inputEditTextA.text.toString().toDouble()
+            var b:Double = inputEditTextB.text.toString().toDouble()
+            val expressionString = inputEditText.text.toString().trim { it <= ' ' }
+            evaluateExpression(a,b,expressionString);
         }
 
 
 
     }
 
-    private fun evaluateExpression() {
-        val expressionString = inputEditText.text.toString().trim { it <= ' ' }
-        if (!expressionString.isEmpty()) {
-            val e = Expression(expressionString)
+    private fun evaluateExpression(a: Double, b: Double, e: String) {
+
+
+        val f = Function("f", e, "x")
+
+        if (!e.isEmpty()) {
+            val e1 = Expression("f($a)",f)
+            val e2 = Expression("f($b)",f)
             //val expression = Expresion(expressionString)
-            val result: Double = e.calculate()
-            resultTextView.text = "Result: $result"
+            val resulta: Double = e1.calculate()
+            resultTextView1.text = "Resultado a: $resulta"
+            val resultb: Double = e2.calculate()
+            resultTextView2.text = "Resultado b: $resultb"
         } else {
-            resultTextView.text = "Enter a valid expression."
+            resultTextView1.text = "Enter a valid expression."
         }
     }
 }
